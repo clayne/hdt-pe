@@ -117,7 +117,7 @@ public:
 
 	FormatPrefs		formatPrefs;	// 08
 	RendererData	* rendererData;	// 14
-	int*			unk18;			// 18
+	BSFixedString	name;			// 18
 	NiTexture		* prevTexture;	// 1C
 	NiTexture		* nextTexture;	// 20
 };
@@ -139,7 +139,7 @@ public:
 	UInt8	align33;		// 33
 	UInt32	unk34;			// 34
 	UInt32	unk38;			// 38
-	
+
 	MEMBER_FN_PREFIX(NiRenderedTexture);
 	DEFINE_MEMBER_FN(ctor, void, 0x00FB5E10);
 	DEFINE_MEMBER_FN(UpdateVirtualImage, void, 0x00A61D20, NiRenderedTexture * newTexture);

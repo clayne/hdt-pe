@@ -11,7 +11,7 @@ void PrintException(_EXCEPTION_POINTERS* info);
 #define EXCEPTION_CAPTURE_END \
 	}__except( PrintException(GetExceptionInformation()), EXCEPTION_EXECUTE_HANDLER )	\
 	{\
-		LogError("Plugin is trying to save game");\
+		HDTLogError("Plugin is trying to save game");\
 		auto saver = BGSSaveLoadManager::GetSingleton();\
 		saver->Save("hdtPhysicsExtension Autosave");\
 		exit(-1);\

@@ -5,7 +5,7 @@
 
 void AccessViolation(EXCEPTION_RECORD* record)
 {
-	LogError("AccessViolation, try to %s 0x%08x failed",
+	HDTLogError("AccessViolation, try to %s 0x%08x failed",
 		record->ExceptionInformation[0]?"write":"read",
 		record->ExceptionInformation[1]
 	);
@@ -16,7 +16,7 @@ void CppException(EXCEPTION_RECORD* record)
 	__try{
 		auto magic = (type_info****)record->ExceptionInformation[2];
 		auto rtti = magic[3][1][1];
-		LogError("C++ Exception %s", rtti->name());
+		HDTLogError("C++ Exception %s", rtti->name());
 	} __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
 
@@ -42,7 +42,7 @@ void PrintCallStack(PCONTEXT context)
 	frame.AddrFrame.Offset = context->Ebp;
 	frame.AddrFrame.Mode = AddrModeFlat;
 
-	LogError("Call Stack (Skyrim ignored the frame pointer register (ebp) so it may not correct) :");
+	HDTLogError("Call Stack (Skyrim ignored the frame pointer register (ebp) so it may not correct) :");
 	
 	HANDLE hProcess = GetCurrentProcess();
 	HANDLE hThread = GetCurrentThread();
@@ -70,16 +70,16 @@ void PrintCallStack(PCONTEXT context)
 			IMAGEHLP_LINE lineInfo = { sizeof(IMAGEHLP_LINE) };
 			DWORD dwLineDisplacement;
 			if( SymGetLineFromAddr( hProcess, frame.AddrPC.Offset, &dwLineDisplacement, &lineInfo ) )
-				LogError( "\t%s : %s in %s line %u", moduleName, pSymbol->Name, lineInfo.FileName, lineInfo.LineNumber );
-			else LogError( "\t%s : %s", moduleName, pSymbol->Name );
+				HDTLogError( "\t%s : %s in %s line %u", moduleName, pSymbol->Name, lineInfo.FileName, lineInfo.LineNumber );
+			else HDTLogError( "\t%s : %s", moduleName, pSymbol->Name );
 		}
-		else LogError( "\t%s : 0x%08x", moduleName, frame.AddrPC.Offset );
+		else HDTLogError( "\t%s : 0x%08x", moduleName, frame.AddrPC.Offset );
 	}
 }
 
 void PrintException(_EXCEPTION_POINTERS* info)
 {
-	LogError("Fatal error occured");
+	HDTLogError("Fatal error occured");
 
 	auto exception = info->ExceptionRecord;
 	HMODULE modules[1024], module = 0;
@@ -95,11 +95,11 @@ void PrintException(_EXCEPTION_POINTERS* info)
 
 	char buf[MAX_PATH];
 	GetModuleFileNameA(module, buf, sizeof(buf));
-	LogError("Code : 0x%08x", exception->ExceptionCode);
-	LogError("Flag : 0x%08x", exception->ExceptionFlags);
-	LogError("Module : %s", buf);
-	LogError("Address : 0x%08x", exception->ExceptionAddress);
-	LogError("Module Address : 0x%08x", module);
+	HDTLogError("Code : 0x%08x", exception->ExceptionCode);
+	HDTLogError("Flag : 0x%08x", exception->ExceptionFlags);
+	HDTLogError("Module : %s", buf);
+	HDTLogError("Address : 0x%08x", exception->ExceptionAddress);
+	HDTLogError("Module Address : 0x%08x", module);
 
 	switch(exception->ExceptionCode)
 	{
@@ -132,5 +132,5 @@ void PrintException(_EXCEPTION_POINTERS* info)
 
 	CloseHandle(dump);
 
-	LogError("Minidump saved in hdtPhysicsExtensions.dmp");
+	HDTLogError("Minidump saved in hdtPhysicsExtensions.dmp");
 }

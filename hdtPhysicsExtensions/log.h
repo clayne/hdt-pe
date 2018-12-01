@@ -38,8 +38,8 @@ private:
 	FILE* out;
 };
 
-#define LogRaw( fmt, ... ) Logger::getSingleton()->WriteRaw( fmt, __VA_ARGS__ )
-#define LogError( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_ERROR, fmt, __VA_ARGS__ )
-#define LogWarning( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_WARNING, fmt, __VA_ARGS__ )
-#define LogInfo( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_INFO, fmt, __VA_ARGS__ )
-#define LogDebug( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_DEBUG, fmt, __VA_ARGS__ )
+#define HDTLogRaw( fmt, ... ) Logger::getSingleton()->WriteRaw( fmt, __VA_ARGS__ )
+#define HDTLogError( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_ERROR, fmt, __VA_ARGS__ )
+#define HDTLogWarning( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_WARNING, fmt, __VA_ARGS__ )
+#define HDTLogInfo( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_INFO, fmt, __VA_ARGS__ )
+#define HDTLogDebug( fmt, ... ) Logger::getSingleton()->Write( Logger::LOG_DEBUG, fmt, __VA_ARGS__ )

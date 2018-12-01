@@ -2,7 +2,7 @@
 
 void errorReport(const char* ch, void* p)
 {
-	LogInfo("Havok Report\n%s", ch);
+	HDTLogInfo("Havok Report\n%s", ch);
 }
 
 static const float* timeStamp = (float*)0x12E355C;
@@ -25,7 +25,7 @@ CWorld::CWorld(void)
 	hkHardwareInfo hwInfo;
 	hkGetHardwareInfo(hwInfo);
 	numThreads = hwInfo.m_numThreads*2;
-	LogInfo("System run with %d threads", numThreads);
+	HDTLogInfo("System run with %d threads", numThreads);
 
 	hkJobQueueCinfo jobQueueInfo;
 	jobQueueInfo.m_jobQueueHwSetup.m_numCpuThreads = numThreads+1;
@@ -61,7 +61,7 @@ CWorld::CWorld(void)
 	
 	m_timeLastUpdate = *timeStamp;
 
-	LogInfo("Havok simulated world created.");
+	HDTLogInfo("Havok simulated world created.");
 }
 
 CWorld::~CWorld(void)
@@ -174,7 +174,7 @@ void CWorld::AddCharacter(int formID)
 	auto obj = std::shared_ptr<CCharacter>(new CCharacter(formID));
 	if(obj->CreateIfValid())
 	{
-		LogInfo("Add character %08x", formID);
+		HDTLogInfo("Add character %08x", formID);
 		m_characters.insert(std::make_pair(formID, obj));
 		obj->AddToWorld(m_pWorld);
 	}
@@ -190,7 +190,7 @@ void CWorld::ScanCell()
 	m_pWorld->markForWrite();
 	if(m_pCell != cell)
 	{
-		LogInfo("Cell changed...");
+		HDTLogInfo("Cell changed...");
 		m_characters.clear();
 		m_pCell = cell;
 
@@ -208,12 +208,12 @@ void CWorld::ScanCell()
 			auto object = (TESObjectREFR*)LookupFormByID(form);
 			if(object->parentCell != cell)
 			{
-				LogInfo("%08x no longer in cell, release it", form);
+				HDTLogInfo("%08x no longer in cell, release it", form);
 				m_characters.erase(i++);
 			}
 			else if(!i->second->CreateIfValid())
 			{
-				LogInfo("%08x now invalid, release it", form);
+				HDTLogInfo("%08x now invalid, release it", form);
 				m_characters.erase(i++);
 			}
 			else (i++)->second->AddToWorld(m_pWorld);
@@ -293,11 +293,11 @@ void CWorld::AddSystemObject(UINT32 id, const std::string& prefix, NiNode* skele
 	auto system = LoadPhysicsFile(path);
 	if(!system)
 	{
-		LogWarning("Invalid havok serialize file : %s", path);
+		HDTLogWarning("Invalid havok serialize file : %s", path);
 		return;
 	}
 	
-	LogInfo("Physics system loaded : %s", path);
+	HDTLogInfo("Physics system loaded : %s", path);
 	CSystemObject::RenameBodies(skeleton, system, prefix);
 	auto obj = std::shared_ptr<CSystemObject>(new CSystemObject);
 	if(obj && obj->BindPhysicsInfo(system, skeleton))

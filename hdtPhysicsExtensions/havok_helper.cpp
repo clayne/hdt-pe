@@ -495,16 +495,16 @@ bool ScaleSystemWithNode(const hkArray<NiNode*>& bones, hkpPhysicsSystem* system
 	
 	std::unordered_map<hkpEntity*, float> mapScale;
 
-	LogDebug("Scaling bodies...");
+	HDTLogDebug("Scaling bodies...");
 	for(int i=0; i<bodies.getSize(); ++i)
 	{
 		float scale;
 		if(!bones[i])
 		{
-			LogWarning("Cannot bind bone : %s - bone doesn't exist", bodies[i]->getName());
+			HDTLogWarning("Cannot bind bone : %s - bone doesn't exist", bodies[i]->getName());
 			if(!IsDynamic(bodies[i]->getMotionType()))
 			{
-				LogError("Illegal hkx file : %s - Fixed/Keyframed body without binding!", bodies[i]->getName());
+				HDTLogError("Illegal hkx file : %s - Fixed/Keyframed body without binding!", bodies[i]->getName());
 				return false;
 			}
 			scale = defaultScale;
@@ -523,7 +523,7 @@ bool ScaleSystemWithNode(const hkArray<NiNode*>& bones, hkpPhysicsSystem* system
 		return idx->second;
 	};
 
-	LogDebug("Scaling constraints...");
+	HDTLogDebug("Scaling constraints...");
 	for(int i=0; i<constraints.getSize(); ++i)
 		if(constraints[i]->getType() != hkpConstraintInstance::TYPE_CHAIN
 		&& constraints[i]->getEntityA()->isFixedOrKeyframed()
@@ -546,7 +546,7 @@ bool ScaleSystemWithNode(const hkArray<NiNode*>& bones, hkpPhysicsSystem* system
 		}
 	}
 
-	LogDebug("Havok physics system attached...");
+	HDTLogDebug("Havok physics system attached...");
 	hkpConstraintStabilizationUtil::stabilizePhysicsSystemInertias(system);
 	return true;
 }
@@ -609,7 +609,7 @@ hkpPhysicsSystem* LoadPhysicsFile(const char* path)
 	BSResourceNiBinaryStream fileStream(path);
 	if(!fileStream.IsValid())
 	{
-		LogError("Load \"%s\" error - file no exist", path);
+		HDTLogError("Load \"%s\" error - file no exist", path);
 		return nullptr;
 	}
 
@@ -629,7 +629,7 @@ hkpPhysicsSystem* LoadPhysicsFile(const char* path)
 	auto resource = hkSerializeUtil::load(loaded.data(), loaded.size(), &err);
 	if(!resource)
 	{
-		LogError("Load \"%s\" error - ", err.defaultMessage.cString());
+		HDTLogError("Load \"%s\" error - ", err.defaultMessage.cString());
 		return 0;
 	}
 
@@ -664,7 +664,7 @@ hkpPhysicsSystem* LoadPhysicsFile(const char* path)
 		}
 	}
 	if(!system)
-		LogError("Couldn't find hkpPhysicsSystem in hkx file \"%s\"", path);
+		HDTLogError("Couldn't find hkpPhysicsSystem in hkx file \"%s\"", path);
 	else for(auto rb : system->getRigidBodies())
 	{
 		// correct dampings

@@ -12,7 +12,7 @@ hkpPhysicsSystem* LoadDefaultBBP()
 	auto system = LoadPhysicsFile(path);
 	if(!system)
 	{
-		LogWarning("Invalid havok serialize file : %s", path);
+		HDTLogWarning("Invalid havok serialize file : %s", path);
 		return 0;
 	}
 	for(int i=0; i<system->getRigidBodies().getSize(); ++i)

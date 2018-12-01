@@ -74,7 +74,7 @@ ThreadLoop::~ThreadLoop()
 void ThreadLoop::wrapper(void* p)
 {
 	auto self = (ThreadLoop*)p;
-	LogInfo("ThreadLoop Begin.");
+	HDTLogInfo("ThreadLoop Begin.");
 
 	self->OnThreadBegin();
 	

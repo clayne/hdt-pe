@@ -35,7 +35,7 @@ EventResult FreezeEventHandler::ReceiveEvent(MenuOpenCloseEvent * evn, EventDisp
 		if(evn->menuName == "RaceSex Menu")
 			CWorld::getSingleton()->SwitchToSeperateClock();
 		
-		LogDebug("Push Menu : %s", evn->menuName.data);
+		HDTLogDebug("Push Menu : %s", evn->menuName.data);
 	}
 	else
 	{
@@ -55,7 +55,7 @@ EventResult FreezeEventHandler::ReceiveEvent(MenuOpenCloseEvent * evn, EventDisp
 			}
 		}
 		
-		LogDebug("Pop Menu : %s", evn->menuName.data);
+		HDTLogDebug("Pop Menu : %s", evn->menuName.data);
 	}
 
 	m_lock.unlock();

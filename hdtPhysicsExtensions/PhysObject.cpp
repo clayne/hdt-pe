@@ -162,7 +162,7 @@ void CSystemObject::RenameBodies(NiNode* skeleton, hkpPhysicsSystem* system, con
 	{
 		if(!bodies[i]->getName())
 		{
-			LogError("Illegal hkx file : body with no name");
+			HDTLogError("Illegal hkx file : body with no name");
 			throw -1;
 		}
 

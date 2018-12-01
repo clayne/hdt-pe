@@ -5,7 +5,7 @@
 
 #include <d3d9.h>
 
-PluginHandle	g_pluginHandle = kPluginHandle_Invalid;
+PluginHandle g_pluginHandle = kPluginHandle_Invalid;
 
 #include "World.h"
 #include "HookArmor.h"
@@ -42,7 +42,7 @@ BOOL WINAPI DllMain(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved)
 
 		DetourTransactionCommit();
 
-		LogDebug("Hooked!!");
+		HDTLogDebug("Hooked!!");
 		CWorld::getSingleton();
 
 		break;
@@ -78,7 +78,7 @@ extern "C"
 
 bool SKSEPlugin_Query(const SKSEInterface * skse, PluginInfo * info)
 {
-	LogRaw(PLUGIN_NAME);
+	HDTLogRaw(PLUGIN_NAME);
 
 	// populate info structure
 	info->infoVersion =	PluginInfo::kInfoVersion;
@@ -90,13 +90,13 @@ bool SKSEPlugin_Query(const SKSEInterface * skse, PluginInfo * info)
 
 	if(skse->isEditor)
 	{
-		LogError("loaded in editor, marking as incompatible");
+		HDTLogError("loaded in editor, marking as incompatible");
 
 		return false;
 	}
 	else if(skse->runtimeVersion < RUNTIME_VERSION_1_9_32_0)
 	{
-		LogError("unsupported runtime version %08X", skse->runtimeVersion);
+		HDTLogError("unsupported runtime version %08X", skse->runtimeVersion);
 
 		return false;
 	}
@@ -105,7 +105,7 @@ bool SKSEPlugin_Query(const SKSEInterface * skse, PluginInfo * info)
 	// ### only fill out PluginInfo and return true/false
 
 	// supported runtime version
-	LogInfo("Queue OK");
+	HDTLogInfo("Queue OK");
 
 	MenuManager * mm = MenuManager::GetSingleton();
 	if (mm) mm->MenuOpenCloseEventDispatcher()->AddEventSink(&g_freezeEventHandler);
@@ -115,7 +115,7 @@ bool SKSEPlugin_Query(const SKSEInterface * skse, PluginInfo * info)
 
 bool SKSEPlugin_Load(const SKSEInterface * skse)
 {
-	LogInfo("SKSEPlugin_Load");
+	HDTLogInfo("SKSEPlugin_Load");
 	return true;
 }
 

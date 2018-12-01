@@ -81,7 +81,7 @@ int CombineTree(NiNode* to, NiNode* from)
 			clone->m_collision = 0;
 			to->AttachChild(clone, false);
 			dst = clone;
-			LogDebug("Attach bone - %s", dst->m_name.data);
+			HDTLogDebug("Attach bone - %s", dst->m_name.data);
 			++sum;
 		}
 		sum += CombineTree(dst, src);

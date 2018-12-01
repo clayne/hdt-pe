@@ -1,0 +1,26 @@
+# Binaries
+
+# Visual Studio
+.vs
+ipch
+Debug
+Release
+*.aps
+*.sdf
+*.suo
+*.user
+*.opensdf
+*.db
+*.opendb
+*.diagsession
+*.psess
+*.vsps
+*.vspx
+
+# File manager
+.directory
+
+# Misc
+doxygen
+*.bak
+*.pc

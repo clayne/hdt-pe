@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <cstdlib>
 #include <string>
 
 template <class T> T GetPrivateProfile(const char* clsnm, const char* rcrdnm, T def, const char* ini);

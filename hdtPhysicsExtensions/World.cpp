@@ -1,3 +1,5 @@
+#include "log.h"
+
 #include "World.h"
 
 void errorReport(const char* ch, void* p)
@@ -101,7 +103,7 @@ void CWorld::SwitchToSeperateClock()
 {
 	m_lock.lock();
 	m_useSeperatedClock = true;
-	m_timeLastUpdate = clock()*0.001;
+	m_timeLastUpdate = clock() * 0.001;
 	m_lock.unlock();
 }
 
@@ -134,11 +136,11 @@ void CWorld::StepWorld(float interval)
 	{
 		m_pWorld->markForWrite();
 		for(auto& i : m_characters)
-			i.second->WriteToWorld(1/interval);
+			i.second->WriteToWorld(1 / interval);
 		for(auto& i : m_systems)
 		{
 			i.second->AddToWorld(m_pWorld);
-			i.second->WriteToWorld(1/interval);
+			i.second->WriteToWorld(1 / interval);
 		}
 		m_pWorld->unmarkForWrite();
 		
@@ -147,7 +149,7 @@ void CWorld::StepWorld(float interval)
 		
 		m_jobThreadPool->waitForCompletion();
 		m_pWorld->finishMtStep();*/
-		while(interval >= TIME_TICK*1.25)
+		while(interval >= TIME_TICK * 1.25)
 		{
 			m_pWorld->stepMultithreaded(m_jobQueue, m_jobThreadPool, TIME_TICK);
 			interval -= TIME_TICK;
@@ -202,7 +204,7 @@ void CWorld::ScanCell()
 	}
 	else
 	{
-		for(auto i=m_characters.begin(); i!=m_characters.end();)
+		for(auto i = m_characters.begin(); i != m_characters.end();)
 		{
 			auto form = i->first;
 			auto object = (TESObjectREFR*)LookupFormByID(form);
@@ -219,7 +221,7 @@ void CWorld::ScanCell()
 			else (i++)->second->AddToWorld(m_pWorld);
 		}
 
-		for(int i=0; i<cell->objectList.count; ++i)
+		for(int i = 0; i < cell->objectList.count; ++i)
 		{
 			auto object = cell->objectList.arr.entries[i];
 			if(DYNAMIC_CAST(object, TESObjectREFR, Actor))
@@ -271,14 +273,14 @@ void CWorld::DoUpdate()
 
 	m_lock.lock();
 
-	auto currTime = m_useSeperatedClock ? clock()*0.001 : *timeStamp;
+	auto currTime = m_useSeperatedClock ? clock() * 0.001 : *timeStamp;
 	auto interval = currTime - m_timeLastUpdate;
 
 	if(interval > TIME_TICK * 0.5)
 	{
 		m_timeLastUpdate = currTime;
 		ScanCell();
-		//if(m_savedDeltaTime > TIME_TICK_US*2) m_savedDeltaTime = TIME_TICK_US*2;
+		//if(m_savedDeltaTime > TIME_TICK_US * 2) m_savedDeltaTime = TIME_TICK_US * 2;
 		StepWorld(interval);
 	}
 	
@@ -318,14 +320,14 @@ void CWorld::RemoveSystemObject(UINT32 id)
 
 void CWorld::ScanAndAdd(UINT32 id, const std::string& prefix, NiNode* skeleton, NiNode* node)
 {
-	for(int i=0; i<node->m_extraDataLen; ++i)
+	for(int i = 0; i < node->m_extraDataLen; ++i)
 	{
 		auto stringData = ni_cast(node->m_extraData[i], NiStringExtraData);
 		if(stringData && stringData->m_name == "HDT Havok Path" && stringData->m_stringData.data)
 			AddSystemObject(id, prefix, skeleton, stringData->m_stringData.data);
 		auto strings = ni_cast(node->m_extraData[i], NiStringsExtraData);
 		if(strings && strings->m_name == "HDT Havok Path")
-			for(int i=0; i<strings->m_count; ++i)
+			for(int i = 0; i < strings->m_count; ++i)
 				if(strings->m_strings[i].data)
 					AddSystemObject(id, prefix, skeleton, strings->m_strings[i].data);
 	}

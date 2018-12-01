@@ -1,6 +1,12 @@
 #pragma once
 
-#include "common.h"
+#include <string>
+#include <atomic>
+#include <memory>
+#include <unordered_set>
+#include <unordered_map>
+
+#include "Thread.h"
 #include "Character.h"
 
 class CWorld

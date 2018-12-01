@@ -1,7 +1,9 @@
-#include "exception.h"
+#include <typeinfo>
 
 #include <psapi.h>
 #include <DbgHelp.h>
+
+#include "exception.h"
 
 void AccessViolation(EXCEPTION_RECORD* record)
 {
@@ -85,7 +87,7 @@ void PrintException(_EXCEPTION_POINTERS* info)
 	HMODULE modules[1024], module = 0;
 	DWORD moduleCount;
 	EnumProcessModules(GetCurrentProcess(), modules, 1024, &moduleCount);
-	for(int i=0; i<moduleCount; ++i)
+	for(int i = 0; i < moduleCount; ++i)
 	{
 		MODULEINFO info;
 		GetModuleInformation(GetCurrentProcess(), modules[i], &info, sizeof(info));

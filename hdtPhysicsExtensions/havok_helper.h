@@ -1,7 +1,8 @@
 #pragma once
 
+#include <chrono>
+
 #include "ppapi_helper.h"
-#include "common.h"
 
 #pragma pack( push, 8 )
 
@@ -114,8 +115,8 @@ void SetNiTransformScaled(NiTransform& out, const hkQsTransform& in);
 static const float scaleToHavok = 0.01425;
 static const float scaleToSkyrim = 1 / scaleToHavok;
 
-static const float TIME_TICK = 1/60.f;
-static const auto TIME_TICK_US = std::chrono::microseconds((long long)(TIME_TICK*1e+6));
+static const float TIME_TICK = 1 / 60.f;
+static const auto TIME_TICK_US = std::chrono::microseconds((long long)(TIME_TICK * 1e+6));
 
 void CalcLocalTransform(NiAVObject* dst);
 
@@ -155,21 +156,21 @@ public:
 	/// Checks two collidables
 	virtual hkBool isCollisionEnabled( const hkpCollidable& a, const hkpCollidable& b ) const;
 
-		/// hkpShapeCollectionFilter interface forwarding
+	/// hkpShapeCollectionFilter interface forwarding
 	virtual hkBool isCollisionEnabled( const hkpCollisionInput& input, const hkpCdBody& a, const hkpCdBody& b, 
-										   const HK_SHAPE_CONTAINER& bContainer, hkpShapeKey bKey ) const;
+									   const HK_SHAPE_CONTAINER& bContainer, hkpShapeKey bKey ) const;
 
-		/// hkpShapeCollectionFilter interface forwarding
+	/// hkpShapeCollectionFilter interface forwarding
 	virtual hkBool isCollisionEnabled( const hkpCollisionInput& input, const hkpCdBody& collectionBodyA, 
 									   const hkpCdBody& collectionBodyB, const HK_SHAPE_CONTAINER& containerShapeA, 
 									   const HK_SHAPE_CONTAINER& containerShapeB, 
 									   hkpShapeKey keyA, hkpShapeKey keyB ) const;
 
-		/// hkpRayShapeCollectionFilter interface forwarding
+	/// hkpRayShapeCollectionFilter interface forwarding
 	virtual hkBool isCollisionEnabled( const hkpShapeRayCastInput& aInput, const HK_SHAPE_CONTAINER& bContainer, 
 									   hkpShapeKey bKey ) const;
 
-		/// hkpRayCollidableFilter interface forwarding
+	/// hkpRayCollidableFilter interface forwarding
 	virtual hkBool isCollisionEnabled( const hkpWorldRayCastInput& a, const hkpCollidable& collidableB ) const;
 
 	static hkUint32 calcCollisionInfo(hkUint32 myGroup, hkUint32 noCollideWith);

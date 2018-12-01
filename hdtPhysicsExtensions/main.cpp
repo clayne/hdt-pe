@@ -3,9 +3,9 @@
 #include "skse/SafeWrite.h"
 #include "skse/GameAPI.h"
 
-#include <d3d9.h>
-
-PluginHandle g_pluginHandle = kPluginHandle_Invalid;
+#include <Windows.h>
+#include <fstream>
+#include <detours.h>
 
 #include "World.h"
 #include "HookArmor.h"
@@ -16,9 +16,9 @@ PluginHandle g_pluginHandle = kPluginHandle_Invalid;
 #include "HookMessage.h"
 #include "HookMemory.h"
 #include "ResourceManager.h"
+#include "log.h"
 
-#include <fstream>
-#include <detours.h>
+PluginHandle g_pluginHandle = kPluginHandle_Invalid;
 
 BOOL WINAPI DllMain(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved)
 {
@@ -113,7 +113,7 @@ bool SKSEPlugin_Query(const SKSEInterface * skse, PluginInfo * info)
 	return true;
 }
 
-bool SKSEPlugin_Load(const SKSEInterface * skse)
+bool SKSEPlugin_Load(const SKSEInterface* skse)
 {
 	HDTLogInfo("SKSEPlugin_Load");
 	return true;

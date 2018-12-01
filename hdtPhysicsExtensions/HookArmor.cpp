@@ -1,3 +1,13 @@
+#include <cstdio>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <detours.h>
+
+#include "ResourceManager.h"
+#include "Thread.h"
+#include "World.h"
+
 #include "HookArmor.h"
 
 auto DoMeshInterporation = (UINT32 (*)(NiNode* mesh0, NiNode* mesh1, void*, int, int))0x0046F010 ;
@@ -63,7 +73,7 @@ NiNode* MyClass::TEST_0046E720(NiNode* armor, NiNode* npc,UINT32 unk2,UINT32 unk
 	
 	auto armornpc = CastNiNode(armor->GetObjectByName("NPC"));
 	if(armornpc)
-		for(int i=0; i<armornpc->m_children.m_arrayBufLen; ++i)
+		for(int i = 0; i < armornpc->m_children.m_arrayBufLen; ++i)
 		{
 			if(armornpc->m_children[i])
 				CombineTree(m_root, armornpc);
@@ -97,7 +107,7 @@ NiNode* MyClass::TEST_0046F0B0(NiNode* armor, UINT32 idx, UINT32 unk2, UINT32 un
 	CWorld::getSingleton()->InitThread();
 
 	auto ret = CALL_MEMBER_FN(this, UNKNOWN_0046F0B0)(armor, idx, unk2, unk3, unk4);
-	auto *flag = ((char*)this) + ((idx+1)<<5);	// unk, get it by asm.
+	auto *flag = ((char*)this) + ((idx + 1) << 5);	// unk, get it by asm.
 	if(!*flag)
 	{
 		//Attach physics system

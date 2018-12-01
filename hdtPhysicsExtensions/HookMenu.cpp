@@ -1,3 +1,5 @@
+#include "log.h"
+
 #include "HookMenu.h"
 
 FreezeEventHandler g_freezeEventHandler;
@@ -14,7 +16,7 @@ static const BSFixedString menuFilterList[] =
 
 bool menuFilter(const BSFixedString& menuName)
 {
-	for(int i=0; i<(sizeof(menuFilterList)/sizeof(BSFixedString)); ++i)
+	for(int i = 0; i < (sizeof(menuFilterList) / sizeof(BSFixedString)); ++i)
 		if(menuName == menuFilterList[i]) return false;
 	return true;
 }

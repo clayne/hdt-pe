@@ -1,5 +1,9 @@
+#include <detours.h>
+
+#include "exception.h"
+#include "World.h"
+
 #include "HookRender.h"
-#include "HookMemory.h"
 
 UINT32 UnkRender::TEST_0069CBD0()
 {

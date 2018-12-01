@@ -1,5 +1,12 @@
-#include "HookWeapon.h"
+#include <cstdio>
+#include <unordered_set>
+#include <detours.h>
+
 #include "ResourceManager.h"
+#include "Thread.h"
+#include "World.h"
+
+#include "HookWeapon.h"
 
 static Lockable lockWeapon;
 static std::unordered_set<NiObject*> weaponList;

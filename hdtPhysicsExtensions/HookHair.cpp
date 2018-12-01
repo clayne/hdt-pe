@@ -1,5 +1,11 @@
-#include "HookHair.h"
+#include <string>
+#include <detours.h>
+
 #include "ResourceManager.h"
+#include "Thread.h"
+#include "World.h"
+
+#include "HookHair.h"
 
 NiNode* ClassHair::TEST_00432070(NiNode* a, void* b)
 {
@@ -21,7 +27,6 @@ UINT MyBSFaceGenNiNode::MySkinFace(NiNode* skeleton, UINT unk)
 
 namespace PlayerHead
 {
-	
 	static Lockable lock;
 	static BSFaceGenNiNode* oldHead = 0;
 	static const std::string prefix = "|HDTHDPT|";
@@ -50,7 +55,7 @@ namespace PlayerHead
 
 			auto npc = player->loadedState->node;
 
-			for(int i=0; i<head->m_children.m_arrayBufLen; ++i)
+			for(int i = 0; i < head->m_children.m_arrayBufLen; ++i)
 			{
 				if(!head->m_children[i]) continue;
 				auto tri = head->m_children[i]->GetAsNiGeometry();
@@ -205,4 +210,3 @@ void DehookHair()
 	DetourDetach((void**)MyBSFaceGenNiNode::_SkinFace_GetPtr(), (void*)GetFnAddr(&MyBSFaceGenNiNode::MySkinFace));
 	DetourDetach((void**)MYNPC::_BindHead_GetPtr(), (void*)GetFnAddr(&MYNPC::MyBindHead));
 }
-

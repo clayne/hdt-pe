@@ -1,8 +1,12 @@
 #pragma once
 
+#include <memory>
+#include <string>
+#include <unordered_map>
+
+#include "Thread.h"
 #include "havok_helper.h"
 #include "netimmerse_helper.h"
-#include "common.h"
 
 class CPhysObject : public Lockable
 {

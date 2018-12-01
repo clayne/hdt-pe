@@ -1,8 +1,7 @@
 #pragma once
 
 #include "PhysObject.h"
-#include "Hair.h"
-#include <vector>
+//#include "Hair.h"
 
 class CBody : public CSystemFormObject
 {

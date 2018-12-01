@@ -1,7 +1,7 @@
-#include "Character.h"
-#include "common.h"
-
+#include "log.h"
 #include "World.h"
+
+#include "Character.h"
 
 hkpPhysicsSystem* LoadDefaultBBP()
 {
@@ -15,7 +15,7 @@ hkpPhysicsSystem* LoadDefaultBBP()
 		HDTLogWarning("Invalid havok serialize file : %s", path);
 		return 0;
 	}
-	for(int i=0; i<system->getRigidBodies().getSize(); ++i)
+	for(int i = 0; i < system->getRigidBodies().getSize(); ++i)
 		system->getRigidBodies()[i]->setCollisionFilterInfo(-1);
 	return system;
 }
@@ -24,10 +24,11 @@ bool CBody::CreateIfValid()
 {
 	auto ref = DYNAMIC_CAST(LookupFormByID(m_formID), TESForm, Actor);
 	if(!ref) return false;
+
 	auto loadedState = ref->loadedState;
 	if(!loadedState || !loadedState->node) return false;
+
 	auto root = loadedState->node;
-	
 	if(m_objects.size() && root == m_objects.begin()->second.model)
 		return true;
 
@@ -64,12 +65,13 @@ void CBody::ReadFromWorld()
 	{
 		auto player = DYNAMIC_CAST(LookupFormByID(m_formID), TESForm, PlayerCharacter);
 		if(!player) return;
+
 		auto root = player->firstPersonSkeleton;
 		if(!root) return;
 		
 		auto& bones = m_objects.begin()->second.system->getBones();
 		auto system = m_objects.begin()->second.system->getSystem();
-		for(int i=0; i<bones.getSize(); ++i)
+		for(int i = 0; i < bones.getSize(); ++i)
 		{
 			if(!bones[i]) continue;
 			if(system->getRigidBodies()[i]->isFixedOrKeyframed()) continue;

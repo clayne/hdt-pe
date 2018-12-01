@@ -1,3 +1,5 @@
+#include "log.h"
+
 #include "netimmerse_helper.h"
 
 void UpdateWorldData(NiAVObject* node)
@@ -21,7 +23,7 @@ void UpdateWorldData(NiAVObject* node)
 void UpdateWorldDataToChild(NiNode* node)
 {
 	if(!node) return;
-	for(int i=0; i<node->m_children.m_arrayBufLen; ++i)
+	for(int i = 0; i < node->m_children.m_arrayBufLen; ++i)
 	{
 		UpdateWorldData(node->m_children[i]);
 		auto next = CastNiNode(node->m_children[i]);
@@ -48,7 +50,7 @@ void UpdateLocalData(NiAVObject* dst)
 		GetNiTransform(dst->m_worldTransform, st);
 		hkTransform pLc;
 		pLc.setMulInverseMul(pt, st);
-		pLc.getTranslation().mul(1/dst->m_parent->m_worldTransform.scale);
+		pLc.getTranslation().mul(1 / dst->m_parent->m_worldTransform.scale);
 		SetNiTransform(dst->m_localTransform, pLc);
 	
 		//NiAVObject::ControllerUpdateContext ctx;
@@ -65,7 +67,7 @@ int CombineTree(NiNode* to, NiNode* from)
 	NiAVObject::ControllerUpdateContext ctx;
 	to->UpdateWorldData(&ctx);
 	int sum = 0;
-	for(int i=0; i<from->m_children.m_size; ++i)
+	for(int i = 0; i < from->m_children.m_size; ++i)
 	{
 		auto src = ni_cast(from->m_children[i], NiNode);
 		if(!src) continue;
@@ -94,7 +96,7 @@ void ClearNode(NiNode* from, const std::string& prefix)
 	if(!from) return;
 
 	int size = from->m_children.m_size;
-	for(int i=0; i<size; ++i)
+	for(int i = 0; i < size; ++i)
 	{
 		auto src = CastNiNode(from->m_children[i]);
 		if(!src) continue;
@@ -121,7 +123,7 @@ bool ShouldRename(NiNode* root, NiAVObject* node, const std::string& prefix)
 
 void RenameNode(NiNode* root, NiNode* node, const std::string& prefix)
 {
-	for(int i=0; i<node->m_children.m_size; ++i)
+	for(int i = 0; i < node->m_children.m_size; ++i)
 	{
 		auto bone = CastNiNode(node->m_children[i]);
 		if(bone)
@@ -135,7 +137,7 @@ void RenameNode(NiNode* root, NiNode* node, const std::string& prefix)
 
 void CancelRename(NiNode* node, const std::string& prefix)
 {
-	for(int i=0; i<node->m_children.m_size; ++i)
+	for(int i = 0; i < node->m_children.m_size; ++i)
 	{
 		auto bone = CastNiNode(node->m_children[i]);
 		if(bone)
@@ -151,5 +153,5 @@ bool IsMyAncestor(NiAVObject* me, NiNode* r)
 {
 	while(me && me!=r)
 		me = me->m_parent;
-	return me==r;
+	return me == r;
 }

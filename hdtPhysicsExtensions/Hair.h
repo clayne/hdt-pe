@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+#include <unordered_map>
+
 #include "PhysObject.h"
 
 class CHair : public CSystemFormObject
@@ -28,4 +31,3 @@ protected:
 
 	std::unordered_map<NiGeometry*, Model> m_modelMap;
 };
-

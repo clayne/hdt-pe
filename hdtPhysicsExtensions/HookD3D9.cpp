@@ -1,5 +1,6 @@
-#include "HookD3D9.h"
 #include <detours.h>
+
+#include "HookD3D9.h"
 
 std::function<void (void)> OnFrameBeginRender = [](){};
 std::function<void (void)> OnFrameEndRender = [](){};

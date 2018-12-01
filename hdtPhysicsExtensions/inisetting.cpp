@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include "inisetting.h"
 
 template <> short GetPrivateProfile(const char* clsnm, const char* rcrdnm, short def, const char* ini)
@@ -64,5 +66,5 @@ template<> void WritePrivateProfile(const char* clsnm, const char* rcrdnm, const
 
 template<> void WritePrivateProfile(const char* clsnm, const char* rcrdnm, const bool& val, const char* ini)
 {
-	WritePrivateProfileString(clsnm, rcrdnm, val?"true":"false", ini);
+	WritePrivateProfileString(clsnm, rcrdnm, val ? "true" : "false", ini);
 }

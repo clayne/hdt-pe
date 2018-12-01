@@ -1,8 +1,8 @@
 #pragma once
 
+#include <cstdio>
+
 #include "Thread.h"
-#include <iostream>
-#include <fstream>
 
 #ifdef _DEBUG
 #define DEFAULT_LOG_LEVEL LOG_DEBUG

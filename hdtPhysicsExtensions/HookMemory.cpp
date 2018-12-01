@@ -1,5 +1,13 @@
-#include "HookMemory.h"
+#include <Windows.h>
+#include <cstdlib>
+#include <cstdio>
+#include <detours.h>
+
 #include "behaviorHelper.h"
+#include "World.h"
+#include "exception.h"
+
+#include "HookMemory.h"
 
 static UnkHeapStruct0** const gcPtr = (UnkHeapStruct0**)0x012E3534;
 
@@ -100,7 +108,6 @@ struct Fragment
 	int size;
 };
 
-#include "World.h"
 void* hkSkyrimMemoryAllocator::blockAllocGuard(int numBytes)
 {
 	//auto ret = CALL_MEMBER_FN(this, blockAlloc)(numBytes);

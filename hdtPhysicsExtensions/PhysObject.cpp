@@ -1,3 +1,8 @@
+#include <algorithm>
+#include <vector>
+
+#include "log.h"
+
 #include "PhysObject.h"
 
 CSystemObject::~CSystemObject()
@@ -15,7 +20,7 @@ void SortAsTree(NiNode* skeleton, hkArray<NiNode*>& bones, hkArray<hkpRigidBody*
 	std::vector<int> idx;
 	std::vector<NiNode*> childlist;
 	idx.resize(bones.getSize());
-	for(int i=0; i<bones.getSize(); ++i)
+	for(int i = 0; i < bones.getSize(); ++i)
 		idx[i] = i;
 	
 	std::stable_sort(idx.begin(), idx.end(), [&](int a, int b)->bool
@@ -30,7 +35,7 @@ void SortAsTree(NiNode* skeleton, hkArray<NiNode*>& bones, hkArray<hkpRigidBody*
 	hkArray<hkpRigidBody*> crbs;
 	crbs.append(rbs);
 
-	for(int i=0; i<idx.size(); ++i)
+	for(int i = 0; i < idx.size(); ++i)
 	{
 		bones[i] = cbones[idx[i]];
 		rbs[i] = crbs[idx[i]];
@@ -42,7 +47,7 @@ bool CSystemObject::BindPhysicsInfo(hkpPhysicsSystem* system, NiNode* skeleton)
 	auto& bodies = system->getRigidBodies();
 	auto& constraints = system->getConstraints();
 	m_bones.setSize(bodies.getSize());
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		m_bones[i] = ni_cast(skeleton->GetObjectByName(bodies[i]->getName()), NiNode);
 		if(m_bones[i]) m_bones[i]->IncRef();
@@ -50,13 +55,13 @@ bool CSystemObject::BindPhysicsInfo(hkpPhysicsSystem* system, NiNode* skeleton)
 	
 	SortAsTree(skeleton, m_bones, (hkArray<hkpRigidBody*>&)bodies);
 	
-	for(int i=0; i<m_bones.getSize(); ++i)
+	for(int i = 0; i < m_bones.getSize(); ++i)
 	{
 		if(bodies[i]->getMotionType() == hkpMotion::MOTION_FIXED)
 			bodies[i]->setMotionType(hkpMotion::MOTION_KEYFRAMED);
 
 		if(bodies[i]->getMotionType() == hkpMotion::MOTION_KEYFRAMED)
-			for(int j=0; j<i; ++j)
+			for(int j = 0; j < i; ++j)
 			{
 				if(bodies[j]->getMotionType() == hkpMotion::MOTION_KEYFRAMED)
 					continue;
@@ -82,7 +87,7 @@ void CSystemObject::ReadFromWorld()
 	auto& bodies = m_system->getRigidBodies();
 	auto& constraints = m_system->getConstraints();
 	
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		if(!m_bones[i]) continue;
 		if(bodies[i]->isFixedOrKeyframed())	continue;
@@ -100,7 +105,7 @@ void CSystemObject::WriteToWorld(float invDeltaTime)
 	hkVector4 pos;
 	hkQuaternion rot;
 	
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		if(!m_bones[i]) continue;
 		if(!bodies[i]->isFixedOrKeyframed()) continue;
@@ -122,7 +127,7 @@ void CSystemObject::AddToWorld(hkpWorld* pWorld)
 	auto& bodies = m_system->getRigidBodies();
 	auto& constraints = m_system->getConstraints();
 
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		hkVector4 pos = hkVector4::getZero();
 		hkQuaternion rot = hkQuaternion::getIdentity();
@@ -132,7 +137,7 @@ void CSystemObject::AddToWorld(hkpWorld* pWorld)
 		pWorld->addEntity(bodies[i]);
 	}
 	
-	for(int i=0; i<constraints.getSize(); ++i)
+	for(int i = 0; i < constraints.getSize(); ++i)
 		pWorld->addConstraint(constraints[i]);
 
 	m_world = pWorld;
@@ -146,10 +151,10 @@ void CSystemObject::RemoveFromWorld()
 	auto& bodies = m_system->getRigidBodies();
 	auto& constraints = m_system->getConstraints();
 	
-	for(int i=0; i<constraints.getSize(); ++i)
+	for(int i = 0; i < constraints.getSize(); ++i)
 		m_world->removeConstraint(constraints[i]);
 
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 		m_world->removeEntity(bodies[i]);
 	
 	m_world = 0;
@@ -158,7 +163,7 @@ void CSystemObject::RemoveFromWorld()
 void CSystemObject::RenameBodies(NiNode* skeleton, hkpPhysicsSystem* system, const std::string& prefix)
 {
 	auto& bodies = system->getRigidBodies();
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		if(!bodies[i]->getName())
 		{

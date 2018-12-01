@@ -1,6 +1,7 @@
-#include "log.h"
 #include <cassert>
 #include <ctime>
+
+#include "log.h"
 
 const char* LevelName[] = {"Always Show", "ERROR", "WARNING", "INFO", "DEBUG" };
 

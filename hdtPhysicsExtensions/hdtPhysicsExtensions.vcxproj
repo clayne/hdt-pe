@@ -141,11 +141,26 @@
     <ClCompile Include="..\skse\PapyrusVM.cpp" />
     <ClCompile Include="..\skse\SafeWrite.cpp" />
     <ClCompile Include="behaviorHelper.cpp" />
+    <ClCompile Include="Body.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_noSimd|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="exception.cpp" />
+    <ClCompile Include="Hair.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_noSimd|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="havok_helper.cpp" />
     <ClCompile Include="HookArmor.cpp" />
+    <ClCompile Include="HookD3D9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_noSimd|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="HookHair.cpp" />
     <ClCompile Include="HookMemory.cpp" />
     <ClCompile Include="HookMenu.cpp" />
@@ -163,11 +178,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="behaviorHelper.h" />
+    <ClInclude Include="Body.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="exception.h" />
+    <ClInclude Include="Hair.h" />
     <ClInclude Include="havok_helper.h" />
     <ClInclude Include="HookArmor.h" />
+    <ClInclude Include="HookD3D9.h" />
     <ClInclude Include="HookHair.h" />
     <ClInclude Include="HookMemory.h" />
     <ClInclude Include="HookMenu.h" />

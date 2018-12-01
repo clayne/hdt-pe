@@ -1,5 +1,8 @@
-#include "HookMessage.h"
+#include <Windows.h>
+
 #include "World.h"
+
+#include "HookMessage.h"
 
 static HHOOK hook = 0;
 

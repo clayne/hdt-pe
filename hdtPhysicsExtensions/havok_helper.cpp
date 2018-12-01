@@ -1,8 +1,13 @@
-#include "havok_helper.h"
-#include "log.h"
+#include <unordered_map>
 
 #include <Common\Base\keycode.cxx>
 #include <Common\Base\Config\hkProductFeatures.cxx>
+
+#include <Physics2012\Collide\Agent\hkpCollisionInput.h>
+
+#include "log.h"
+
+#include "havok_helper.h"
 
 void GetNiTransform(const NiTransform& in, hkQsTransform& out)
 {
@@ -188,11 +193,11 @@ void ScaleMotorAngular(hkpConstraintMotor* motor, float scale)
 void ScaleConstraint(hkpConstraintData* data, float scaleA, float scaleB)
 {
 	_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
-	float scale = (scaleA+scaleB)*0.5;
+	float scale = (scaleA + scaleB) * 0.5;
 	if(data->getType() == hkpConstraintData::CONSTRAINT_TYPE_BALL_SOCKET_CHAIN)
 	{
 		auto chain = (hkpBallSocketChainData*)data;
-		for(int i=0; i<chain->m_infos.getSize(); ++i)
+		for(int i = 0; i < chain->m_infos.getSize(); ++i)
 		{
 			chain->m_infos[i].m_pivotInA.mul(scaleA);
 			chain->m_infos[i].m_pivotInB.mul(scaleB);
@@ -201,7 +206,7 @@ void ScaleConstraint(hkpConstraintData* data, float scaleA, float scaleB)
 	else if(data->getType() == hkpConstraintData::CONSTRAINT_TYPE_STIFF_SPRING_CHAIN)
 	{
 		auto chain = (hkpStiffSpringChainData*)data;
-		for(int i=0; i<chain->m_infos.getSize(); ++i)
+		for(int i = 0; i < chain->m_infos.getSize(); ++i)
 		{
 			chain->m_infos[i].m_pivotInA.mul(scaleA);
 			chain->m_infos[i].m_pivotInB.mul(scaleB);
@@ -211,7 +216,7 @@ void ScaleConstraint(hkpConstraintData* data, float scaleA, float scaleB)
 	else if(data->getType() == hkpConstraintData::CONSTRAINT_TYPE_POWERED_CHAIN)
 	{
 		auto chain = (hkpPoweredChainData*)data;
-		for(int i=0; i<chain->m_infos.getSize(); ++i)
+		for(int i = 0; i < chain->m_infos.getSize(); ++i)
 		{
 			chain->m_infos[i].m_pivotInA.mul(scaleA);
 			chain->m_infos[i].m_pivotInB.mul(scaleB);
@@ -233,7 +238,7 @@ void ScaleConstraint(hkpConstraintData* data, float scaleA, float scaleB)
 	else if(data->getType() == hkpConstraintData::CONSTRAINT_TYPE_GENERIC)
 	{
 		auto list = ((hkpGenericConstraintData*)data)->getScheme();
-		for(int i=0, j=0; i<list->m_commands.getSize(); ++i)
+		for(int i = 0, j = 0; i < list->m_commands.getSize(); ++i)
 		{
 			switch(list->m_commands[i])
 			{
@@ -496,7 +501,7 @@ bool ScaleSystemWithNode(const hkArray<NiNode*>& bones, hkpPhysicsSystem* system
 	std::unordered_map<hkpEntity*, float> mapScale;
 
 	HDTLogDebug("Scaling bodies...");
-	for(int i=0; i<bodies.getSize(); ++i)
+	for(int i = 0; i < bodies.getSize(); ++i)
 	{
 		float scale;
 		if(!bones[i])
@@ -524,13 +529,13 @@ bool ScaleSystemWithNode(const hkArray<NiNode*>& bones, hkpPhysicsSystem* system
 	};
 
 	HDTLogDebug("Scaling constraints...");
-	for(int i=0; i<constraints.getSize(); ++i)
+	for(int i = 0; i < constraints.getSize(); ++i)
 		if(constraints[i]->getType() != hkpConstraintInstance::TYPE_CHAIN
 		&& constraints[i]->getEntityA()->isFixedOrKeyframed()
 		&& constraints[i]->getEntityB()->isFixedOrKeyframed())
 				system->removeConstraint(i--);
 
-	for(int i=0; i<constraints.getSize(); ++i)
+	for(int i = 0; i < constraints.getSize(); ++i)
 	{
 		if(constraints[i]->getType() == hkpConstraintInstance::TYPE_CHAIN)
 		{
@@ -558,8 +563,8 @@ hkUint32 MyGroupFilter::calcCollisionInfo(hkUint32 myGroup, hkUint32 noCollideWi
 
 bool MyGroupFilter::isFiltered(hkUint32 a, hkUint32 b)
 {
-	auto groupA = a>>24;
-	auto mask = groupA >= 24 ? -1 : (1<<groupA);
+	auto groupA = a >> 24;
+	auto mask = groupA >= 24 ? -1 : (1 << groupA);
 	return b&mask;
 }
 
@@ -574,8 +579,6 @@ hkBool MyGroupFilter::isCollisionEnabled( const hkpCollidable& a, const hkpColli
 {
 	return isCollisionEnabled( a.getCollisionFilterInfo(), b.getCollisionFilterInfo() );
 }
-
-#include <Physics2012\Collide\Agent\hkpCollisionInput.h>
 
 hkBool MyGroupFilter::isCollisionEnabled( const hkpCollisionInput& input, const hkpCdBody& a, const hkpCdBody& b, const hkpShapeContainer& bCollection, hkpShapeKey bKey  ) const
 {
@@ -671,8 +674,8 @@ hkpPhysicsSystem* LoadPhysicsFile(const char* path)
 		//v' = v*pow(1-damping, dt)
 		//but in havok, v' = v*(1-dh*dt);(dh : damping havok)
 		// so pow(1-damping, dt) = 1-dh*dt -> dh = (1-pow(1-d, dt))/dt
-		rb->setLinearDamping( (1 - pow(1-rb->getLinearDamping(), TIME_TICK)) / TIME_TICK );
-		rb->setAngularDamping( (1 - pow(1-rb->getAngularDamping(), TIME_TICK)) / TIME_TICK );
+		rb->setLinearDamping( (1 - pow(1 - rb->getLinearDamping(), TIME_TICK)) / TIME_TICK );
+		rb->setAngularDamping( (1 - pow(1 - rb->getAngularDamping(), TIME_TICK)) / TIME_TICK );
 	}
 
 	return system;

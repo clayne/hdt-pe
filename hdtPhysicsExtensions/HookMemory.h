@@ -1,6 +1,5 @@
 #pragma once
 
-#include <detours.h>
 #include "common.h"
 #include "netimmerse_helper.h"
 
@@ -31,10 +30,8 @@ struct UnkRCManager
 };
 
 struct UnkHeapStruct0{
-
 	int unk[0x1E];
 	UnkRCManager *data78;
-
 };
 
 struct UnkHeapStruct1{

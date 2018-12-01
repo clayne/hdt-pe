@@ -107,6 +107,15 @@
     <ClCompile Include="..\skse\SafeWrite.cpp">
       <Filter>skse</Filter>
     </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HookD3D9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="behaviorHelper.h">
@@ -167,6 +176,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hair.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HookD3D9.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
-#include "Thread.h"
 #include "log.h"
+
+#include "Thread.h"
 
 Thread::Thread(void)
 {
@@ -10,7 +11,6 @@ Thread::Thread(void)
 	m_finish.set();
 	m_shouldExit = false;
 }
-
 
 Thread::~Thread(void)
 {

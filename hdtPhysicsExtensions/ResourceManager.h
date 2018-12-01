@@ -1,10 +1,11 @@
 #pragma once
 
-#include "common.h"
-#include <detours.h>
+#include <functional>
+#include <unordered_map>
+
+#include "Thread.h"
 #include "ppapi_helper.h"
 #include "netimmerse_helper.h"
-#include <functional>
 
 class ResourceManager
 {
@@ -33,4 +34,3 @@ private:
 	std::unordered_map<NiObject*, std::function<void(NiObject*)>> m_callbacks;
 	Lockable m_lock;
 };
-

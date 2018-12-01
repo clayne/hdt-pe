@@ -11,7 +11,8 @@
 #include "skse\NiSerialization.h"
 #include "skse\NiTextures.h"
 
-#include "common.h"
+#include <string>
+
 #include "havok_helper.h"
 
 #define DEFINE_MEMBER_FN_HOOK(functionName, retnType, address, ...)		\

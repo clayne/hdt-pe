@@ -1,3 +1,7 @@
+#include <algorithm>
+
+#include "log.h"
+
 #include "Hair.h"
 
 CHair::CHair(int form)
@@ -57,7 +61,7 @@ bool CHair::CreateIfValid()
 		else ++i;
 	}
 	
-	for(int i=0; i<root->m_children.m_size; ++i)
+	for(int i = 0; i < root->m_children.m_size; ++i)
 	{
 		auto subnode = ni_cast(root->m_children[i], NiGeometry);
 		if(!subnode) continue;
@@ -67,7 +71,7 @@ bool CHair::CreateIfValid()
 		auto& myModel = tp.first->second;
 
 		NiNode* sceneRoot = 0;
-		for(int j=0; j<subnode->m_spSkinInstance->m_spSkinData->m_uiBones; ++j)
+		for(int j = 0; j < subnode->m_spSkinInstance->m_spSkinData->m_uiBones; ++j)
 		{
 			auto bone = subnode->m_spSkinInstance->m_ppkBones[j];
 			while(bone != m_skeleton && bone->m_parent)
@@ -83,7 +87,7 @@ bool CHair::CreateIfValid()
 		myModel.m_sceneRoot = sceneRoot;
 		sceneRoot->IncRef();
 
-		for(int j=0; j<subnode->m_spSkinInstance->m_spSkinData->m_uiBones; ++j)
+		for(int j = 0; j < subnode->m_spSkinInstance->m_spSkinData->m_uiBones; ++j)
 		{
 			auto boneB = ni_cast( subnode->m_spSkinInstance->m_ppkBones[j], NiNode );
 			if(boneB && !boneB->m_name.data) continue;
@@ -100,7 +104,7 @@ bool CHair::CreateIfValid()
 			});*/
 		}
 		
-		for(int j=0; j<sceneRoot->m_extraDataLen; ++j)
+		for(int j = 0; j < sceneRoot->m_extraDataLen; ++j)
 		{
 			auto string = ni_cast(sceneRoot->m_extraData[j], NiStringExtraData);
 			if(string && string->m_name.data && string->m_name == "HDT Havok Path" && string->m_stringData.data)
@@ -109,7 +113,7 @@ bool CHair::CreateIfValid()
 			auto strings = ni_cast(sceneRoot->m_extraData[j], NiStringsExtraData);
 			if(strings && strings->m_name.data && strings->m_name == "HDT Havok Path")
 			{
-				for(int k=0; k<strings->m_count; ++k)
+				for(int k = 0; k < strings->m_count; ++k)
 					if(strings->m_strings[k].data)
 						LoadPhysicsSystem(sceneRoot, strings->m_strings[k].data);
 			}
@@ -130,7 +134,7 @@ void CHair::LoadPhysicsSystem(NiNode* model, const char* path)
 	auto system = LoadPhysicsFile(path);
 	if(!system)
 	{
-		LogWarning("Invalid havok serialize file : %s", path);
+		HDTLogWarning("Invalid havok serialize file : %s", path);
 		return;
 	}
 	

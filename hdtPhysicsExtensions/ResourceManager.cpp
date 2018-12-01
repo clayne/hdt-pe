@@ -1,3 +1,5 @@
+#include <detours.h>
+
 #include "ResourceManager.h"
 
 ResourceManager::ResourceManager(void)

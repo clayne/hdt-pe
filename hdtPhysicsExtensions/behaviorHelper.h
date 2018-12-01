@@ -121,4 +121,3 @@ class hkbBehaviorGraph : public hkbGenerator
 	hkBool updateActiveNodes;
 	hkBool stateOrTransitionChanged;
 };
-

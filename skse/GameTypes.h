@@ -163,6 +163,16 @@ public:
 
 	T& operator[] (UInt32 index) { return arr.entries[index]; }
 
+	// This could be better
+	bool CopyFrom(tArray<T> * rhs)
+	{
+		if(rhs->count == 0) return false;
+		if(!rhs->arr.entries) return false;
+		if(!Allocate(rhs->count)) return false;
+		memcpy(arr.entries, rhs->arr.entries, sizeof(T) * count);
+		return true;
+	}
+
 	bool Allocate(UInt32 numEntries)
 	{
 		arr.entries = (T *)FormHeap_Allocate(sizeof(T) * numEntries);
@@ -1073,6 +1083,18 @@ public:
 
 	void	Lock(void) { m_lock.Lock(); }
 	void	Release(void) { m_lock.Release(); }
+	template<typename T> friend class SafeDataLocker;
+};
+
+template<typename T>
+class SimpleLocker
+{
+public:
+	SimpleLocker(SafeDataHolder<T> * dataHolder) { m_holder = dataHolder; m_holder->Lock(); }
+	~SimpleLocker() { m_holder->Release(); }
+
+protected:
+	SafeDataHolder<T>	* m_holder;
 };
 
 // 0C

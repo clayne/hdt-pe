@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110_xp</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -72,16 +72,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_06_16\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_07_03\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;HK_CONFIG_SIMD=HK_CONFIG_SIMD_ENABLED;WIN32;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ForcedIncludeFiles>common/IPrefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>detours.lib;psapi.lib;dbghelp.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkgBridge.lib;hkgCommon.lib;hkgDx9s.lib;hkgDx11.lib;hkgOglES.lib;hkgOglES2.lib;hkgOgls.lib;hkgSoundCommon.lib;hkgSoundXAudio2.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkBase.lib;hkCompat.lib;hkGeometryUtilities.lib;hkInternal.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>common.lib;detours.lib;psapi.lib;dbghelp.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkgBridge.lib;hkgCommon.lib;hkgDx9s.lib;hkgDx11.lib;hkgOglES.lib;hkgOglES2.lib;hkgOgls.lib;hkgSoundCommon.lib;hkgSoundXAudio2.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkBase.lib;hkCompat.lib;hkGeometryUtilities.lib;hkInternal.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Detours\lib.X86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Detours\lib.X86;$(SolutionDir)common\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,7 +91,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_06_16\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_07_03\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;HK_CONFIG_SIMD=HK_CONFIG_SIMD_ENABLED;WIN32;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>common/IPrefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -101,9 +101,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>detours.lib;psapi.lib;dbghelp.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkgBridge.lib;hkgCommon.lib;hkgDx9s.lib;hkgDx11.lib;hkgOglES.lib;hkgOglES2.lib;hkgOgls.lib;hkgSoundCommon.lib;hkgSoundXAudio2.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkBase.lib;hkCompat.lib;hkGeometryUtilities.lib;hkInternal.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>common.lib;detours.lib;psapi.lib;dbghelp.lib;hkaAnimation.lib;hkaInternal.lib;hkaPhysics2012Bridge.lib;hkcdCollide.lib;hkcdInternal.lib;hkgBridge.lib;hkgCommon.lib;hkgDx9s.lib;hkgDx11.lib;hkgOglES.lib;hkgOglES2.lib;hkgOgls.lib;hkgSoundCommon.lib;hkgSoundXAudio2.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkBase.lib;hkCompat.lib;hkGeometryUtilities.lib;hkInternal.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Detours\lib.X86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Detours\lib.X86;$(SolutionDir)common\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_noSimd|Win32'">
@@ -113,7 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_06_16\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\Detours\include;$(SolutionDir)..\skse_1_07_03\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>common/IPrefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -130,11 +130,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\skse\GameAPI.cpp" />
+    <ClCompile Include="..\skse\GameBSExtraData.cpp" />
     <ClCompile Include="..\skse\GameData.cpp" />
+    <ClCompile Include="..\skse\GameExtraData.cpp" />
+    <ClCompile Include="..\skse\GameFormComponents.cpp" />
     <ClCompile Include="..\skse\GameForms.cpp" />
+    <ClCompile Include="..\skse\GameReferences.cpp" />
     <ClCompile Include="..\skse\GameRTTI.cpp" />
     <ClCompile Include="..\skse\GameStreams.cpp" />
     <ClCompile Include="..\skse\GameTypes.cpp" />
+    <ClCompile Include="..\skse\HashUtil.cpp" />
     <ClCompile Include="..\skse\NiObjects.cpp" />
     <ClCompile Include="..\skse\NiRTTI.cpp" />
     <ClCompile Include="..\skse\PapyrusArgs.cpp" />
@@ -177,6 +182,14 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\skse\GameRTTI.h" />
+    <ClInclude Include="..\skse\GameTypes.h" />
+    <ClInclude Include="..\skse\NiExtraData.h" />
+    <ClInclude Include="..\skse\NiGeometry.h" />
+    <ClInclude Include="..\skse\NiNodes.h" />
+    <ClInclude Include="..\skse\NiObjects.h" />
+    <ClInclude Include="..\skse\NiTextures.h" />
+    <ClInclude Include="..\skse\NiTypes.h" />
     <ClInclude Include="behaviorHelper.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Character.h" />

@@ -323,13 +323,13 @@ void CWorld::ScanAndAdd(UINT32 id, const std::string& prefix, NiNode* skeleton, 
 	for(int i = 0; i < node->m_extraDataLen; ++i)
 	{
 		auto stringData = ni_cast(node->m_extraData[i], NiStringExtraData);
-		if(stringData && stringData->m_name == "HDT Havok Path" && stringData->m_stringData.data)
-			AddSystemObject(id, prefix, skeleton, stringData->m_stringData.data);
+		if(stringData && stringData->m_pcName == "HDT Havok Path" && stringData->m_pString.data)
+			AddSystemObject(id, prefix, skeleton, stringData->m_pString.data);
 		auto strings = ni_cast(node->m_extraData[i], NiStringsExtraData);
-		if(strings && strings->m_name == "HDT Havok Path")
-			for(int i = 0; i < strings->m_count; ++i)
-				if(strings->m_strings[i].data)
-					AddSystemObject(id, prefix, skeleton, strings->m_strings[i].data);
+		if(strings && strings->m_pcName == "HDT Havok Path")
+			for(int i = 0; i < strings->m_size; ++i)
+				if(strings->m_data[i].data)
+					AddSystemObject(id, prefix, skeleton, strings->m_data[i].data);
 	}
 }
 

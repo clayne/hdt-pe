@@ -42,9 +42,9 @@ void GetNiTransform(const NiTransform& in, hkTransform& out)
 	_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 	hkVector4 pos;
 	hkRotation rot;
-	hkVector4 col0(in.rot.data[0],in.rot.data[3],in.rot.data[6]);
-	hkVector4 col1(in.rot.data[1],in.rot.data[4],in.rot.data[7]);
-	hkVector4 col2(in.rot.data[2],in.rot.data[5],in.rot.data[8]);
+	hkVector4 col0(in.rot.data[0][0],in.rot.data[1][0],in.rot.data[2][0]);
+	hkVector4 col1(in.rot.data[0][1],in.rot.data[1][1],in.rot.data[2][1]);
+	hkVector4 col2(in.rot.data[0][2],in.rot.data[1][2],in.rot.data[2][2]);
 	rot.setCols(col0, col1, col2);
 	pos.set(in.pos.x, in.pos.y, in.pos.z);
 
@@ -58,9 +58,9 @@ void SetNiTransform(NiTransform& out, const hkTransform& in)
 	float temp[4];
 	hkVector4 mat[3];
 	in.getRotation().getRows(mat[0], mat[1], mat[2]);
-	mat[0].store3(out.rot.data);
-	mat[1].store3(out.rot.data+3);
-	mat[2].store3(out.rot.data+6);
+	mat[0].store3(out.rot.data[0]);
+	mat[1].store3(out.rot.data[1]);
+	mat[2].store3(out.rot.data[2]);
 
 	in.getTranslation().store4(temp);
 	out.pos.x = temp[0];

@@ -116,6 +116,21 @@
     <ClCompile Include="HookD3D9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\skse\GameReferences.cpp">
+      <Filter>skse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\skse\GameBSExtraData.cpp">
+      <Filter>skse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\skse\GameExtraData.cpp">
+      <Filter>skse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\skse\GameFormComponents.cpp">
+      <Filter>skse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\skse\HashUtil.cpp">
+      <Filter>skse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="behaviorHelper.h">
@@ -186,6 +201,30 @@
     </ClInclude>
     <ClInclude Include="HookD3D9.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\GameRTTI.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\GameTypes.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiExtraData.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiGeometry.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiNodes.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiObjects.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiTextures.h">
+      <Filter>skse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\skse\NiTypes.h">
+      <Filter>skse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

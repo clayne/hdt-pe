@@ -107,15 +107,15 @@ bool CHair::CreateIfValid()
 		for(int j = 0; j < sceneRoot->m_extraDataLen; ++j)
 		{
 			auto string = ni_cast(sceneRoot->m_extraData[j], NiStringExtraData);
-			if(string && string->m_name.data && string->m_name == "HDT Havok Path" && string->m_stringData.data)
-				LoadPhysicsSystem(sceneRoot, string->m_stringData.data);
+			if(string && string->m_pcName.data && string->m_pcName == "HDT Havok Path" && string->m_pcName.data)
+				LoadPhysicsSystem(sceneRoot, string->m_pcName.data);
 
 			auto strings = ni_cast(sceneRoot->m_extraData[j], NiStringsExtraData);
-			if(strings && strings->m_name.data && strings->m_name == "HDT Havok Path")
+			if(strings && strings->m_pcName.data && strings->m_pcName == "HDT Havok Path")
 			{
-				for(int k = 0; k < strings->m_count; ++k)
-					if(strings->m_strings[k].data)
-						LoadPhysicsSystem(sceneRoot, strings->m_strings[k].data);
+				for(int k = 0; k < strings->m_size; ++k)
+					if(strings->m_data[k].data)
+						LoadPhysicsSystem(sceneRoot, strings->m_data[k].data);
 			}
 		}
 		

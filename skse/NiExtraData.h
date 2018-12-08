@@ -4,6 +4,8 @@
 #include "skse/NiObjects.h"
 #include "skse/GameTypes.h"
 
+class NiGeometryData;
+
 class BSFaceGenKeyframe
 {
 public:
@@ -12,7 +14,7 @@ public:
 	virtual void Unk_01(void); // pure
 	virtual void Unk_02(void); // pure
 	virtual void Unk_03(void); // pure
-	virtual void Unk_04(void); // pure
+	virtual void Unk_04(UInt32 unk1); // pure
 	virtual void Unk_05(void); // pure
 	virtual void Unk_06(void); // pure
 	virtual void Unk_07(void); // pure
@@ -27,16 +29,118 @@ public:
 class BSFaceGenKeyframeMultiple : public BSFaceGenKeyframe
 {
 public:
-	UInt32	unk04;	// 04
+	UInt32	type;	// 04
 	UInt32	unk08;	// 08
-	UnkArray	unk0C;	// 0C
+
+	float	* values;	// 0C
+	UInt32	count;		// 10
+	UInt8	isUpdated;	// 14 - Set to 0 for update request
+	UInt8	pad15[3];
 };
 STATIC_ASSERT(sizeof(BSFaceGenKeyframeMultiple) == 0x18);
 
 class NiExtraData : public NiObject
 {
 public:
-	BSFixedString m_name;	// 08
+	NiExtraData();
+	~NiExtraData();
+
+	BSFixedString m_pcName;	// 08
+
+	static NiExtraData* Create(UInt32 size, UInt32 vtbl);
+};
+
+class NiBooleanExtraData : public NiExtraData
+{
+public:
+	NiBooleanExtraData();
+	~NiBooleanExtraData();
+
+	bool	m_data;	// 0C
+};
+
+// 10
+class NiStringExtraData : public NiExtraData
+{
+public:
+	NiStringExtraData();
+	~NiStringExtraData();
+
+	BSFixedString m_pString;	// 0C
+};
+
+// 10
+class NiIntegerExtraData : public NiExtraData
+{
+public:
+	NiIntegerExtraData();
+	~NiIntegerExtraData();
+
+	SInt32 m_data;	// 0C
+};
+
+// 10
+class NiFloatExtraData : public NiExtraData
+{
+public:
+	NiFloatExtraData();
+	~NiFloatExtraData();
+
+	float m_data;	// 0C
+};
+
+// 14
+class NiBinaryExtraData : public NiExtraData
+{
+public:
+	NiBinaryExtraData();
+	~NiBinaryExtraData();
+
+	char		* m_data;	// 0C
+	UInt32		m_size;		// 10
+};
+
+// 14
+class NiFloatsExtraData : public NiExtraData
+{
+public:
+	NiFloatsExtraData();
+	~NiFloatsExtraData();
+
+	UInt32	m_size;		// 0C
+	float	* m_data;	// 10
+};
+
+// 14
+class NiIntegersExtraData : public NiExtraData
+{
+public:
+	NiIntegersExtraData();
+	~NiIntegersExtraData();
+
+	UInt32	m_size;		// 0C
+	SInt32	* m_data;	// 10
+};
+
+// 14
+class NiStringsExtraData : public NiExtraData
+{
+public:
+	NiStringsExtraData();
+	~NiStringsExtraData();
+
+	UInt32	m_size;		// 0C
+	BSFixedString* m_data;	// 10
+};
+
+// 1C
+class NiVectorExtraData : public NiExtraData
+{
+public:
+	NiVectorExtraData();
+	~NiVectorExtraData();
+
+	float m_vector[4];
 };
 
 // 1B4
@@ -44,12 +148,55 @@ class BSFaceGenAnimationData : public NiExtraData
 {
 public:
 	enum {
+		kKeyframeType_Expression = 0,
+		kKeyframeType_Unk1,
+		kKeyframeType_Modifier,
+		kKeyframeType_Phoneme,
+		kKeyframeType_Custom,
+		kKeyframeType_Reset = 255,
 		kNumKeyframes = 12
 	};
-	void	* unk08;						// 08
+
 	UInt32	unk0C;							// 0C
 	BSFaceGenKeyframeMultiple	keyFrames[kNumKeyframes];	// 10
-	UInt32	unk1A0[(0x1A0 - 0x130) >> 2];	// 1A0
+	float	unk130;							// 130
+	float	unk134;							// 134
+	float	unk138;							// 138
+	UInt32	unk13C;							// 13C
+	UInt32	unk140;							// 140
+	UInt32	unk144;							// 144
+	UInt32	unk148;							// 148
+	float	unk14C;							// 14C
+	float	unk150;							// 150
+	UInt32	unk154;							// 154
+	UInt8	unk158;							// 158
+	UInt8	unk159;							// 159
+	UInt8	unk15A;							// 15A
+	UInt8	unk15B;							// 15B
+	UInt32	unk15C;							// 15C
+	UInt32	unk160;							// 160
+	UInt32	unk164;							// 164
+	UInt32	unk168;							// 168
+	UInt32	unk16C;							// 16C
+	UInt32	unk170;							// 170
+	UInt32	unk174;							// 174
+	UInt32	unk178;							// 178
+	UInt32	unk17C;							// 17C
+	UInt32	unk180;							// 180
+	UInt32	unk184;							// 184
+	UInt32	unk188;							// 188
+	float	unk18C;							// 18C
+	float	unk190;							// 190
+	float	unk194;							// 194
+	float	unk198;							// 198
+	UInt8	unk19C;							// 19C
+	UInt8	unk19D;							// 19D
+	UInt8	unk19E;							// 19E
+	UInt8	unk19F;							// 19F
+	UInt8	unk1A0;							// 1A0
+	UInt8	unk1A1;							// 1A1
+	UInt8	unk1A2;							// 1A2
+	UInt8	unk1A3;							// 1A3
 	UInt8	unk1A4;							// 1A4
 	UInt8	unk1A5;							// 1A5
 	UInt8	overrideFlag;					// 1A6
@@ -65,65 +212,28 @@ public:
 	
 };
 
-class NiStringExtraData : public NiExtraData
-{
-public:
-	BSFixedString m_stringData;	// 0c
-};
-
-class NiStringsExtraData : public NiExtraData
-{
-public:
-	UINT32 m_count;
-	BSFixedString* m_strings;
-};
+STATIC_ASSERT(offsetof(BSFaceGenAnimationData, keyFrames) == 0x10);
 
 STATIC_ASSERT(offsetof(BSFaceGenAnimationData, overrideFlag) == 0x1A6);
 STATIC_ASSERT(sizeof(BSFaceGenAnimationData) == 0x1B4);
 
-class BSFaceGenModel : public NiRefObject
-{
-public:
-
-	struct Data08
-	{
-		UInt32 unk00; // 00
-		NiNode* m_meshRoot;
-		NiGeometry* m_triShape;
-		UInt32 unk0C; // 0C
-		BSFaceGenMorphData * unk10; // 10
-	};
-	Data08 * unk08; // 08
-	UInt32 unk0C; // 0C
-	
-	MEMBER_FN_PREFIX(BSFaceGenModel);
-	DEFINE_MEMBER_FN(LoadModel, UINT32, 0x005A60D0, const char*, const char*, UINT);
-};
-
+// 30 (FMD)
 class BSFaceGenModelExtraData : public NiExtraData
 {
 public:
 	BSFaceGenModel* m_model;
 	BSFixedString bones[8];
-	//MEMBER_FN_PREFIX(BSFaceGenModelExtraData);
-	//DEFINE_MEMBER_FN(GetData, const BSFixedString&, 0x005A8220, UINT idx);	//Fucking bugly function if idx > 8;
-	/*
-005A8220  mov         eax,dword ptr [esp+4] 		 
-005A8224  cmp         eax,8  				
-005A8227  ja          005A8230  				;if(x <= 8)
-005A8229  lea         eax,[ecx+eax*4+10h]  		;return (this+x*4+10h);
-005A822D  ret         4  
-005A8230  mov         eax,1  				;
-005A8235  test        byte ptr ds:[12E32F0h],al  	;
-005A823B  jne         005A825F  
-005A823D  or          dword ptr ds:[12E32F0h],eax  
-005A8243  push        10D1068h  
-005A8248  mov         ecx,12E32ECh  
-005A824D  call        00A511C0  
-005A8252  push        103CE70h  
-005A8257  call        00F520BC  
-005A825C  add         esp,4  				;static UNKTYPE 12E32ECh
-005A825F  mov         eax,12E32ECh  		;return 12E32ECh
-005A8264  ret         4  
-	*/
+	
+};
+STATIC_ASSERT(sizeof(BSFaceGenModelExtraData) == 0x30);
+
+// 18 (FOD)
+class BSFaceGenBaseMorphExtraData : public NiExtraData
+{
+public:
+	NiPoint3 * vertexData;		// 0C
+	UInt32	modelVertexCount;	// 10 - Same as 14 if the tri model is correct
+	UInt32	vertexCount;		// 14
+
+	static BSFaceGenBaseMorphExtraData* Create(NiGeometryData * data, bool copy = false);
 };

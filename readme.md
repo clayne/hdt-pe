@@ -22,7 +22,7 @@ The source code of HDT Physics Extension is in GNU LGPL license from the informa
 
 - Microsoft Visual Studio 2012
 - Havok Physics & Animation SDK 2013.1
-Hint hint: "Havok_2013-1-0_PC_XS_win32" or "Havok Engine SDKs"
+`Hint hint: "Havok Content Tools MegaPack: Download" or "Havok Engine SDKs" or "Havok_2013-1-0_PC_XS_win32"`
 - [SKSE 1.7.3](http://skse.silverlock.org)
 - [Microsoft Detours](https://github.com/Microsoft/Detours)
 

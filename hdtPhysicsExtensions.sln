@@ -11,20 +11,15 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
-		Release_noSimd|Win32 = Release_noSimd|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Debug|Win32.Build.0 = Debug|Win32
-		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Release_noSimd|Win32.ActiveCfg = Release_noSimd|Win32
-		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Release_noSimd|Win32.Build.0 = Release_noSimd|Win32
 		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Release|Win32.ActiveCfg = Release|Win32
 		{DE1B11DA-032C-4EF4-96E1-94830B70B004}.Release|Win32.Build.0 = Release|Win32
 		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Debug|Win32.ActiveCfg = Debug|Win32
 		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Debug|Win32.Build.0 = Debug|Win32
-		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Release_noSimd|Win32.ActiveCfg = Release|Win32
-		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Release_noSimd|Win32.Build.0 = Release|Win32
 		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Release|Win32.ActiveCfg = Release|Win32
 		{20C6411C-596F-4B85-BE4E-8BC91F59D8A6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection

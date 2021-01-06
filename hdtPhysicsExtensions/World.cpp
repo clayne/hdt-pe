@@ -208,17 +208,27 @@ void CWorld::ScanCell()
 		{
 			auto form = i->first;
 			auto object = (TESObjectREFR*)LookupFormByID(form);
+			if(!object)
+			{
+				HDTLogInfo("%08x now invalid (object == NULL), release it", form);
+				m_characters.erase(i++);
+				continue;
+			}
+
 			if(object->parentCell != cell)
 			{
 				HDTLogInfo("%08x no longer in cell, release it", form);
 				m_characters.erase(i++);
+				continue;
 			}
 			else if(!i->second->CreateIfValid())
 			{
 				HDTLogInfo("%08x now invalid, release it", form);
 				m_characters.erase(i++);
+				continue;
 			}
-			else (i++)->second->AddToWorld(m_pWorld);
+
+			(i++)->second->AddToWorld(m_pWorld);
 		}
 
 		for(int i = 0; i < cell->objectList.count; ++i)
